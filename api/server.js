@@ -18,4 +18,8 @@ server.use(helmet());
 // server.use("/patients/:id", checkConsent);
 // server.use("/patients", routes.patientRoutes);
 
+server.get("/", (req, res) => {
+  res.json({ message: "Welcome" });
+});
+
 module.exports = server;
