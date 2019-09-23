@@ -1,4 +1,3 @@
-// Requires
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -23,11 +22,9 @@ router.post("/login", async (req, res) => {
     res.json({ token, isProvider });
   } catch (error) {
     if (error.message === "400") {
-      return res
-        .status(400)
-        .json({
-          error: "Request must include values for username and password."
-        });
+      return res.status(400).json({
+        error: "Request must include values for username and password."
+      });
     } else {
       res.status(401).json({ error: "Invalid credentials" });
     }
@@ -55,11 +52,9 @@ router.post("/register", async (req, res) => {
         .status(400)
         .json({ error: "Username already associated with an account." });
     } else if (error.message === "400") {
-      return res
-        .status(400)
-        .json({
-          error: "Request must include values for username and password."
-        });
+      return res.status(400).json({
+        error: "Request must include values for username and password."
+      });
     } else {
       res.status(500).json({ error: error.message });
     }
