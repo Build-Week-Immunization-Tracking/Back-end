@@ -20,6 +20,12 @@ router.get("/", async (req, res) => {
   try {
     const userId = req.decoded.id;
     const user = await getUser(userId);
+    let patients;
+    if (user.providerId) {
+      patients = await getPatientsForProvider(user.providerId);
+    } else {
+      patients = await getPatients(userId);
+    }
     res.json({ patients });
   } catch (error) {
     res.status(500).json({ error: error.message });

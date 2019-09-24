@@ -3,6 +3,6 @@ module.exports = {
   ...require("./users"),
   ...require("./patients"),
   ...require("./immunizations"),
-  ...require("./patient_immunizations"),
+  ...require("./patient-immunizations"),
   ...require("./permissions")
 };

@@ -3,7 +3,7 @@ const server = express();
 const cors = require("cors");
 const helmet = require("helmet");
 
-//const routes = require("./routes");
+const routes = require("./routes");
 const checkConsent = require("./middleware/checkConsent");
 const authenticate = require("./middleware/authenticate");
 
