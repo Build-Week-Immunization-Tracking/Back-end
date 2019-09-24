@@ -3,12 +3,12 @@ const { getPatientsForProvider } = require("./patients");
 
 module.exports = {
   addUser,
-  getUserById,
+  getUser,
   getUsers,
   updateUser,
   deleteUser,
   getUserByUsername,
-  getPatientsbyUsersId
+  getPatientsByUser
 };
 
 function addUser(user) {
@@ -17,7 +17,18 @@ function addUser(user) {
     .insert(user);
 }
 
-function getUserById(id) {}
+async function getUser(id) {
+  try {
+    const [user] = await db("users").where({ id });
+    if (!user) throw new Error("No user found by that ID.");
+    const patients = user.providerId
+      ? await getPatientsForProvider(user.providerId)
+      : await getPatientsByUser(id);
+    return Promise.resolve({ ...user, patients });
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
 
 function getUsers() {
   return db("users");
@@ -39,6 +50,6 @@ function getUserByUsername(username) {
   return db("users").where({ username });
 }
 
-function getPatientsbyUsersId(id) {
+function getPatientsByUser(id) {
   return db("patients").where({ "patients.userId": id });
 }
