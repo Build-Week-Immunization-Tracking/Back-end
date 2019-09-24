@@ -39,7 +39,8 @@ router.put("/:id", async (req, res) => {
     const userId = req.decoded.id;
     const providerId = req.params.id;
     const user = await getUser(userId);
-    if (user.providerId !== providerId) throw new Error(403);
+    console.log(user.providerId);
+    if (user.providerId == providerId) throw new Error(403);
     const { name } = req.body;
     if (!name) throw new Error(400);
     const [success] = await updateProvider(providerId, { name });
@@ -49,11 +50,9 @@ router.put("/:id", async (req, res) => {
       case "403":
         return res.status(403).json({ error: "Unauthorized" });
       case "400":
-        return res
-          .status(400)
-          .json({
-            error: "Please provide updated information in request body."
-          });
+        return res.status(400).json({
+          error: "Please provide updated information in request body."
+        });
       default:
         res.status(500).json({ error: error.message });
     }

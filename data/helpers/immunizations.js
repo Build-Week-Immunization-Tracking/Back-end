@@ -1,11 +1,11 @@
 const db = require("../dbConfig");
 
 module.exports = {
-  getImmunizations,
-  getImmunizationById
+  getImmunization,
+  getImmunizations
 };
 
-function getImmunizationById(id) {
+function getImmunization(id) {
   return db("immunizations").where({ id });
 }
 

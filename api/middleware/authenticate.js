@@ -5,7 +5,7 @@ const { getUser } = require("../../data/helpers");
 async function authenticate(req, res, next) {
   try {
     const header = req.get("Authorization") || authError();
-    const token = header.split(" ")[1] || authError();
+    const token = header.split(" ")[0] || authError();
     const decoded = jwt.verify(token, jwtSecret); // Will throw error if unsuccessful
     const user = await getUser(decoded.id);
     if (!user) authError(); // Cannot continue with above syntax, as await getUser() will always return a promise

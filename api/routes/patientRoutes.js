@@ -160,7 +160,7 @@ router.post("/:id/consent", async (req, res) => {
     }
   }
 });
-router.delete("/id/consent", async (req, res) => {
+router.delete("/:id/consent", async (req, res) => {
   try {
     const id = req.decoded.id;
     const patient = req.patient;

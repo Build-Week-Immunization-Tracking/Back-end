@@ -1,5 +1,6 @@
 exports.up = function(knex) {
   return knex.schema.createTable("users", tbl => {
+    tbl.increments();
     //Username 255 chars max, REQUIRED, Must be unique
     tbl
       .string("username", 255)

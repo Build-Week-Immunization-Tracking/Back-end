@@ -5,7 +5,7 @@ const { jwtSecret } = require("../../config/secrets");
 const {
   getUserByUsername,
   addUser,
-  AddProvider
+  addProvider
 } = require("../../data/helpers");
 
 const router = express.Router();
@@ -22,11 +22,9 @@ router.post("/login", async (req, res) => {
     res.json({ token, isProvider });
   } catch (error) {
     if (error.message === "400")
-      return res
-        .status(400)
-        .json({
-          error: "Request must include values for username and password."
-        });
+      return res.status(400).json({
+        error: "Request must include values for username and password."
+      });
     else res.status(401).json({ error: "Invalid credentials" });
   }
 });

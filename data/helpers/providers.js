@@ -2,7 +2,7 @@ const db = require("../dbConfig");
 
 module.exports = {
   getProviders,
-  getProviderbyId,
+  getProvider,
   addProvider,
   updateProvider,
   deleteProvider
@@ -12,19 +12,21 @@ function getProviders() {
   return db("providers");
 }
 
-function getProviderbyId(id) {
+function getProvider(id) {
   return db("providers").where({ id });
 }
 
 function addProvider(name) {
-  return "providers".returning("id").insert({ name });
+  return db("providers")
+    .returning("id")
+    .insert({ name });
 }
 
-function updateProvider(id, update) {
+function updateProvider(id, changes) {
   return db("providers")
     .where({ id })
     .returning(["id", "name", "createdAt"])
-    .update(update);
+    .update(changes);
 }
 
 function deleteProvider(id) {
