@@ -17,7 +17,9 @@ function getProviderbyId(id) {
 }
 
 function addProvider(name) {
-  return "providers".returning("id").insert({ name });
+  return db("providers")
+    .returning("id")
+    .insert({ name });
 }
 
 function updateProvider(id, update) {

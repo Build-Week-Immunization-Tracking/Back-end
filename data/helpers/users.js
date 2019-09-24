@@ -11,6 +11,9 @@ module.exports = {
   getPatientsByUser
 };
 
+// All functions in this file should use parameters based on the `users` table, such as `users.id` and `users.username`
+// Any functions making use of data from the `patients` table should go in `patients.js`
+
 function addUser(user) {
   return db("users")
     .returning("id")
@@ -31,15 +34,17 @@ async function getUser(id) {
 }
 
 function getUsers() {
+  // Should never be used outside of development - HIPAA
   return db("users");
 }
 
-function updateUser(id, update) {
+function updateUser(id, changes) {
   return db("users")
     .where({ id })
     .returning(["id", "username", "email", "providerId", "createdAt"])
-    .update(update);
+    .update(changes);
 }
+
 function deleteUser(id) {
   return db("users")
     .where({ id })
@@ -47,6 +52,7 @@ function deleteUser(id) {
 }
 
 function getUserByUsername(username) {
+  // Primarily for testing purposes
   return db("users").where({ username });
 }
 

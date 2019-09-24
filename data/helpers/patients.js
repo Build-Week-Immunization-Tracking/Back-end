@@ -2,7 +2,7 @@ const db = require("../dbConfig");
 
 module.exports = {
   getPatients,
-  getPatientbyId,
+  getPatient,
   addPatient,
   updatePatient,
   deletePatient,
@@ -14,7 +14,7 @@ function getPatients(userId) {
   return db("patients").where({ userId });
 }
 
-function getPatientbyId(id) {
+function getPatient(id) {
   return db("patients").where({ id });
 }
 
