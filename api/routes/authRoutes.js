@@ -19,7 +19,7 @@ router.post("/login", async (req, res) => {
       throw new Error();
     const token = jwt.sign({ id: user.id }, jwtSecret, { expiresIn: "1d" });
     const isProvider = Boolean(user.providerId); // if providerId exists, it will convert to true
-    res.json({ token, isProvider });
+    res.json({ id: user.id, token, isProvider });
   } catch (error) {
     if (error.message === "400")
       return res.status(400).json({
