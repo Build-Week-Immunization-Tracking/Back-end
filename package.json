@@ -27,7 +27,7 @@
     "express": "^4.17.1",
     "gitignore": "^0.6.0",
     "helmet": "^3.21.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "knex": "^0.19.4",
     "moment": "^2.24.0",
     "pg": "^7.12.1",
